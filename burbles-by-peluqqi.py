@@ -125,6 +125,9 @@ def servEnumeration():
     print(color("\n[>] ip a",bcolors.SOFTORANGE))
     os.system("ip a")"""
 
+    print(color("\n===== END OF SERVICES AND INTERNALS ENUMERATION =========================================",bcolors.DARKBLUE));
+    mainMenu()
+
 def color(str, code):
     return f"{code}{str}{bcolors.DEFAULT}"
 
