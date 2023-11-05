@@ -141,7 +141,7 @@ def intEnumeration():
 
 def servEnumeration():
     print(color("\n===== SERVICES ===============================================================================",bcolors.DARKBLUE)+"\n");
-    print("Press enter to execute")1
+    print("Press enter to execute")
     
     for cmd in commands.PRIVESC_SERVENUM:
         processCommand(cmd)
