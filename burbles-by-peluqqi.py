@@ -51,6 +51,7 @@ class commands:
         "find / -type f \( -name *.conf -o -name *.config \) -exec ls -l {} \; 2>/dev/null",
         "find / -type f -name \"*.sh\" 2>/dev/null | grep -v \"src\|snap\|share\"",
         "ps aux | grep root",
+        "ss -tulpn" # List tcp/udp listening sockets
     ]
     PRIVESC_CREDHUNTING=[
         "ls /var",
@@ -118,7 +119,7 @@ def linPrivescMenu():
 
 def envEnumeration():
     user = os.popen('whoami').read()
-    print(color("\n===== ENVIRONMENT ENUMERATION ===============================================================\n",bcolors.DARKBLUE));
+    print(color("\n===== ENVIRONMENT ENUMERATION ================================================================\n",bcolors.DARKBLUE));
     print("Press enter to execute")
     
     for cmd in commands.PRIVESC_ENVENUM:
@@ -140,7 +141,7 @@ def intEnumeration():
 
 def servEnumeration():
     print(color("\n===== SERVICES ===============================================================================",bcolors.DARKBLUE)+"\n");
-    print("Press enter to execute")
+    print("Press enter to execute")1
     
     for cmd in commands.PRIVESC_SERVENUM:
         processCommand(cmd)
