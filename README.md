@@ -2,8 +2,9 @@
 
 ### Changes
 
-> 11/05/2023 Module 1: Linux Privilege Escalation module added:* Environment enumeration
+> 11/05/2023 Module 1: Linux Privilege Escalation
 >
+> * Environment enumeration
 > * Internals enumeration
 > * Services enumeration
 > * Credential hunting
