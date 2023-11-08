@@ -104,7 +104,7 @@
   > net localgroup administrators # Get group detail
   > net accounts # Get password policy and other account information
   ```
-  * [ ] Communication with Processes
+* [ ] Communication with Processes
 
   ```bash
   > netstat -ano
