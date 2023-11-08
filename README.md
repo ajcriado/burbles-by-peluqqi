@@ -1,12 +1,73 @@
 # burbles-by-peluqqi
-My personal tool for pentesting
-<br />
-<br />
-<br />
-<ins>11/05/2023:</ins>
-<br />
-1. Linux Privilege Escalation module added: 
-	* Environment enumeration 
-	* Internals enumeration 
-	* Services enumeration 
-	* Credential hunting
+
+### Changes
+
+> 11/05/2023 Module 1: Linux Privilege Escalation module added:* Environment enumeration
+>
+> * Internals enumeration
+> * Services enumeration
+> * Credential hunting
+
+
+## Cheatsheet
+
+### Linux Privilege Escalation
+
+* [ ] Environment enumeration
+
+```bash
+> whoami
+> id
+> hostname
+> ip a
+> sudo -l
+> cat /etc/os-release
+> echo $PATH
+> env
+> uname -a
+> # lscpu
+> cat /etc/shells
+> # cat /etc/fstab | grep -v \"#\" | column -t
+> # route
+> # arp -a
+> cat /etc/passwd
+> cat /etc/shadow
+> cat /etc/group
+> ls /home
+> df -h # Mounted fs
+> find / -type d -name ".*" -ls 2>/dev/null
+> ls -l /tmp /var/tmp /dev/sh
+```
+
+* [ ] Internals enumeration
+
+```bash
+> ip a
+> cat /etc/hosts
+> lastlog
+> w
+> history
+> find / -type f \( -name *_hist -o -name *_history \) -exec ls -l {} \; 2>/dev/null
+> ls -R -la /etc/cron*
+> # find /proc -name cmdline -exec cat {} \; 2>/dev/null | tr " " "\n""
+```
+
+* [ ] Services enumeration
+
+  ```bash
+  > apt list --installed | tr "/" " " | cut -d" " -f1,3 | sed 's/[0-9]://g'
+  > sudo -V | head -n 1
+  > # ls -l /bin /usr/bin/ /usr/sbin/
+  > find / -type f \( -name *.conf -o -name *.config \) -exec ls -l {} \; 2>/dev/null
+  > find / -type f -name \"*.sh\" 2>/dev/null | grep -v "src\|snap\|share"
+  > ps aux | grep root
+  > ss -tulpn" # List tcp/udp listening sockets
+  ```
+* [ ] Credential hunting
+
+  ```bash
+  > ls /var
+  > ls ~/.ssh
+  > find / -type f -name *.ssh -exec ls -l {} \; 2>/dev/null
+  > find / -type f -name *.bak -exec ls -l {} \; 2>/dev/null
+  ```
