@@ -15,42 +15,42 @@
 
 * [ ] Environment enumeration
 
-```bash
-> whoami
-> id
-> hostname
-> ip a
-> sudo -l
-> cat /etc/os-release
-> echo $PATH
-> env
-> uname -a
-> # lscpu
-> cat /etc/shells
-> # cat /etc/fstab | grep -v \"#\" | column -t
-> # route
-> # arp -a
-> cat /etc/passwd
-> cat /etc/shadow
-> cat /etc/group
-> ls /home
-> df -h # Mounted fs
-> find / -type d -name ".*" -ls 2>/dev/null
-> ls -l /tmp /var/tmp /dev/sh
-```
+  ```bash
+  > whoami
+  > id
+  > hostname
+  > ip a
+  > sudo -l
+  > cat /etc/os-release
+  > echo $PATH
+  > env
+  > uname -a
+  > # lscpu
+  > cat /etc/shells
+  > # cat /etc/fstab | grep -v \"#\" | column -t
+  > # route
+  > # arp -a
+  > cat /etc/passwd
+  > cat /etc/shadow
+  > cat /etc/group
+  > ls /home
+  > df -h # Mounted fs
+  > find / -type d -name ".*" -ls 2>/dev/null
+  > ls -l /tmp /var/tmp /dev/sh
+  ```
 
 * [ ] Internals enumeration
 
-```bash
-> ip a
-> cat /etc/hosts
-> lastlog
-> w
-> history
-> find / -type f \( -name *_hist -o -name *_history \) -exec ls -l {} \; 2>/dev/null
-> ls -R -la /etc/cron*
-> # find /proc -name cmdline -exec cat {} \; 2>/dev/null | tr " " "\n""
-```
+  ```bash
+  > ip a
+  > cat /etc/hosts
+  > lastlog
+  > w
+  > history
+  > find / -type f \( -name *_hist -o -name *_history \) -exec ls -l {} \; 2>/dev/null
+  > ls -R -la /etc/cron*
+  > # find /proc -name cmdline -exec cat {} \; 2>/dev/null | tr " " "\n""
+  ```
 
 * [ ] Services enumeration
 
@@ -70,4 +70,46 @@
   > ls ~/.ssh
   > find / -type f -name *.ssh -exec ls -l {} \; 2>/dev/null
   > find / -type f -name *.bak -exec ls -l {} \; 2>/dev/null
+  ```
+
+### Windows Privilege Escalation
+
+* [ ] Situational Awareness
+
+  ```bash
+  > ipconfig /all # Interface(s), IP Address(es), DNS Information
+  > arp -a
+  > route print
+  > Get-MpComputerStatus # Windows Defender status
+  > Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections # AppLocker rules
+  > Get-AppLockerPolicy -Local | Test-AppLockerPolicy -path C:\Windows\System32\cmd.exe -User Everyone # Test AppLocker policy
+  ```
+* [ ] Initial Enumeration
+
+  ```bash
+  > tasklist /svc
+  > set
+  > systeminfo
+  > wmic qfe # Patches and Updates
+  > Get-HotFix | ft -AutoSize # PS Patches and Updates
+  > wmic product get name # Installed programs
+  > Get-WmiObject -Class Win32_Product |  select Name, Version # PS Installed programs
+  > netstat -ano # Display running processes
+  > query user # Logged-In users
+  > echo %USERNAME% # Current user
+  > whoami /priv # Privileges
+  > whoami /groups
+  > net user # Get all users
+  > net localgroup # Get all groups
+  > net localgroup administrators # Get group detail
+  > net accounts # Get password policy and other account information
+  ```
+  * [ ] Communication with Processes
+
+  ```bash
+  > netstat -ano
+  > pipelist.exe /accepteula # List named pipes with pipelist app
+  > gci \\.\pipe\ # PS List named pipes
+  > accesschk.exe /accepteula \\.\Pipe\lsass -v # Review LSASS named pipes permissions
+  > accesschk.exe -accepteula -w \pipe\<service> -v # Check service named pipe permissions
   ```
