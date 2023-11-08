@@ -8,7 +8,6 @@
 > * Services enumeration
 > * Credential hunting
 
-
 ## Cheatsheet
 
 ### Linux Privilege Escalation
@@ -59,7 +58,7 @@
   > sudo -V | head -n 1
   > # ls -l /bin /usr/bin/ /usr/sbin/
   > find / -type f \( -name *.conf -o -name *.config \) -exec ls -l {} \; 2>/dev/null
-  > find / -type f -name \"*.sh\" 2>/dev/null | grep -v "src\|snap\|share"
+  > find / -type f -name "*.sh" 2>/dev/null | grep -v "src\|snap\|share"
   > ps aux | grep root
   > ss -tulpn" # List tcp/udp listening sockets
   ```
