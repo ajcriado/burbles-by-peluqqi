@@ -11,7 +11,7 @@ echo "|                                                 by peluqqi              
 echo "======================================================================================"
 echo "                                Situational Awareness                                 "
 echo "======================================================================================"
-echo "Press enter to execute"
+echo "Press enter to execute, type N to skip"
 echo ""
 echo "[>] ipconfig /all # Interface(s), IP Address(es), DNS Information"
 set /p input= Type any input

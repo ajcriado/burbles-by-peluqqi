@@ -119,7 +119,7 @@ def linPrivescMenu():
 def envEnumeration():
     user = os.popen('whoami').read()
     print(color("\n===== ENVIRONMENT ENUMERATION ================================================================\n",bcolors.DARKBLUE));
-    print("Press enter to execute")
+    print("Press enter to execute, type N to skip")
     
     for cmd in commands.PRIVESC_ENVENUM:
         processCommand(cmd)
@@ -130,7 +130,7 @@ def envEnumeration():
 
 def intEnumeration():
     print(color("\n===== INTERNALS ENUMERATION ==================================================================\n",bcolors.DARKBLUE));
-    print("Press enter to execute")
+    print("Press enter to execute, type N to skip")
     
     for cmd in commands.PRIVESC_INTENUM:
         processCommand(cmd)
@@ -140,7 +140,7 @@ def intEnumeration():
 
 def servEnumeration():
     print(color("\n===== SERVICES ===============================================================================",bcolors.DARKBLUE)+"\n");
-    print("Press enter to execute")
+    print("Press enter to execute, type N to skip")
     
     for cmd in commands.PRIVESC_SERVENUM:
         processCommand(cmd)
@@ -152,7 +152,7 @@ def servEnumeration():
 
 def credHunting():
     print(color("\n===== CREDENTIAL HUNTING =====================================================================",bcolors.DARKBLUE)+"\n");
-    print("Press enter to execute")
+    print("Press enter to execute, type N to skip")
     
     for cmd in commands.PRIVESC_CREDHUNTING:
         processCommand(cmd)
