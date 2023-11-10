@@ -38,7 +38,6 @@
   > find / -type d -name ".*" -ls 2>/dev/null
   > ls -l /tmp /var/tmp /dev/sh
   ```
-
 * [ ] Internals enumeration
 
   ```bash
@@ -51,7 +50,6 @@
   > ls -R -la /etc/cron*
   > # find /proc -name cmdline -exec cat {} \; 2>/dev/null | tr " " "\n""
   ```
-
 * [ ] Services enumeration
 
   ```bash
@@ -77,6 +75,7 @@
 * [ ] Situational Awareness
 
   ```bash
+  First of all, check 'Program Files' folders
   > ipconfig /all # Interface(s), IP Address(es), DNS Information
   > arp -a
   > route print
