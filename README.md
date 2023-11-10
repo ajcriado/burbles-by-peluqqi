@@ -8,6 +8,13 @@
 > * Internals enumeration
 > * Services enumeration
 > * Credential hunting
+>
+> 11/10/2023 Windows executable
+>
+> * Situational awareness
+> * Initial enumeration
+> * Communication with processes
+> * Exploitable permissions
 
 ## Cheatsheet
 
@@ -73,7 +80,7 @@
 
 ### Windows Privilege Escalation
 
-* [ ] Situational Awareness
+* [ ] Situational awareness
 
   ```bash
   First of all, check 'Program Files' folders
@@ -84,7 +91,7 @@
   > Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections # AppLocker rules
   > Get-AppLockerPolicy -Local | Test-AppLockerPolicy -path C:\Windows\System32\cmd.exe -User Everyone # Test AppLocker policy
   ```
-* [ ] Initial Enumeration
+* [ ] Initial enumeration
 
   ```bash
   > tasklist /svc
@@ -104,7 +111,7 @@
   > net localgroup administrators # Get group detail
   > net accounts # Get password policy and other account information
   ```
-* [ ] Communication with Processes
+* [ ] Communication with processes
 
   ```bash
   > netstat -ano
@@ -112,4 +119,18 @@
   > gci \\.\pipe\ # PS List named pipes
   > accesschk.exe /accepteula \\.\Pipe\lsass -v # Review LSASS named pipes permissions
   > accesschk.exe -accepteula -w \pipe\<service> -v # Check service named pipe permissions
+  ```
+* [ ] Exploitable permissions
+
+  > Note: Based on the server's settings, it might be required to spawn an
+  > elevated CMD prompt to bypass UAC and have this privilege.
+
+  ```bash
+  User privileges:
+    > SeImpersonate and SeAssignPrimaryToken
+    > SeDebugPrivilege
+    > SeTakeOwnershipPrivilege
+
+  Group privileges:
+    > SeBackupPrivilege
   ```
