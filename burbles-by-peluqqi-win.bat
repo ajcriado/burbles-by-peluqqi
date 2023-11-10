@@ -14,3 +14,5 @@ echo "==========================================================================
 echo "Press enter to execute"
 echo ""
 echo "[>] ipconfig /all # Interface(s), IP Address(es), DNS Information"
+set /p input= Type any input
+echo Input is: %input%
