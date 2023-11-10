@@ -123,7 +123,7 @@
 * [ ] Exploitable permissions
 
   > Note: Based on the server's settings, it might be required to spawn an
-  > elevated CMD prompt to bypass UAC and have this privilege.
+  > elevated CMD prompt to bypass UAC and have this privileges
 
   ```bash
   User privileges:
