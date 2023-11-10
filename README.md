@@ -37,6 +37,7 @@
   > df -h # Mounted fs
   > find / -type d -name ".*" -ls 2>/dev/null
   > ls -l /tmp /var/tmp /dev/sh
+  > ls /var/www/html
   ```
 * [ ] Internals enumeration
 
@@ -64,7 +65,7 @@
 * [ ] Credential hunting
 
   ```bash
-  > ls /var
+  > ls /var/www/html
   > ls ~/.ssh
   > find / -type f -name *.ssh -exec ls -l {} \; 2>/dev/null
   > find / -type f -name *.bak -exec ls -l {} \; 2>/dev/null

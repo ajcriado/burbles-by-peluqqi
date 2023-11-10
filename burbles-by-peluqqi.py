@@ -33,7 +33,8 @@ class commands:
         "ls /home",
         "df -h", # Mounted fs
         "find / -type d -name \".*\" -ls 2>/dev/null",
-        "ls -l /tmp /var/tmp /dev/shm"
+        "ls -l /tmp /var/tmp /dev/shm",
+        "ls /var/www/html"
     ]
     PRIVESC_INTENUM=[
         "ip a",
@@ -55,7 +56,7 @@ class commands:
         "ss -tulpn" # List tcp/udp listening sockets
     ]
     PRIVESC_CREDHUNTING=[
-        "ls /var",
+        "ls /var/www/html",
         "ls ~/.ssh",
         "find / -type f -name *.ssh -exec ls -l {} \; 2>/dev/null",
         "find / -type f -name *.bak -exec ls -l {} \; 2>/dev/null",
