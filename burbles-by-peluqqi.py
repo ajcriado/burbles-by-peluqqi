@@ -34,7 +34,9 @@ class commands:
         "df -h", # Mounted fs
         "find / -type d -name \".*\" -ls 2>/dev/null",
         "ls -l /tmp /var/tmp /dev/shm",
-        "ls /var/www/html"
+        "ls -l /var/www/html",
+        "ls -l /opt",
+        "ls -l /srv"
     ]
     PRIVESC_INTENUM=[
         "ip a",
