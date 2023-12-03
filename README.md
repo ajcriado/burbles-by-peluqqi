@@ -1,21 +1,5 @@
 # burbles-by-peluqqi
 
-### Changes
-
-> 11/05/2023 Module 1: Linux Privilege Escalation
->
-> * Environment enumeration
-> * Internals enumeration
-> * Services enumeration
-> * Credential hunting
->
-> 11/10/2023 Windows executable
->
-> * Situational awareness
-> * Initial enumeration
-> * Communication with processes
-> * Exploitable permissions
-
 ## Cheatsheet
 
 ### Linux Privilege Escalation
