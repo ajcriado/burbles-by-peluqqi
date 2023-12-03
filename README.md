@@ -20,6 +20,10 @@
 
 ### Linux Privilege Escalation
 
+[https://book.hacktricks.xyz/linux-hardening/privilege-escalation](https://book.hacktricks.xyz/linux-hardening/privilege-escalation)
+
+[https://github.com/carlospolop/PEASS-ng/releases](https://github.com/carlospolop/PEASS-ng/releases)
+
 * [ ] Environment enumeration
 
   ```bash
@@ -43,13 +47,16 @@
   > ls /home
   > df -h # Mounted fs
   > find / -type d -name ".*" -ls 2>/dev/null
-  > ls -l /tmp /var/tmp /dev/sh
+  > ls -l /tmp /var/tmp /dev/shm
   > ls /var/www/html
+  > ls -l /opt
+  > ls -l /srv
   ```
 * [ ] Internals enumeration
 
   ```bash
   > ip a
+  > find / -perm -4000 2>/dev/null # Check binaries in GTFO Bins
   > cat /etc/hosts
   > lastlog
   > w
@@ -67,7 +74,7 @@
   > find / -type f \( -name *.conf -o -name *.config \) -exec ls -l {} \; 2>/dev/null
   > find / -type f -name "*.sh" 2>/dev/null | grep -v "src\|snap\|share"
   > ps aux | grep root
-  > ss -tulpn" # List tcp/udp listening sockets
+  > ss -tulpn # List tcp/udp listening sockets
   ```
 * [ ] Credential hunting
 
@@ -79,6 +86,10 @@
   ```
 
 ### Windows Privilege Escalation
+
+[https://book.hacktricks.xyz/windows-hardening/windows-local-privilege-escalation](https://book.hacktricks.xyz/windows-hardening/windows-local-privilege-escalation)
+
+[https://github.com/carlospolop/PEASS-ng/releases](https://github.com/carlospolop/PEASS-ng/releases)
 
 * [ ] Situational awareness
 
@@ -124,6 +135,7 @@
 
   > Note: Based on the server's settings, it might be required to spawn an
   > elevated CMD prompt to bypass UAC and have this privileges
+  >
 
   ```bash
   User privileges:

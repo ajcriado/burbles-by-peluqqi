@@ -40,6 +40,7 @@ class commands:
     ]
     PRIVESC_INTENUM=[
         "ip a",
+        "find / -perm -4000 2>/dev/null", # Check binaries in GTFO Bins
         "cat /etc/hosts",
         "lastlog",
         "w",
