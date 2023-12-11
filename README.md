@@ -92,6 +92,7 @@
   > tasklist /svc
   > set
   > systeminfo
+  > echo %PROCESSOR_ARCHITECTURE%
   > wmic qfe # Patches and Updates
   > Get-HotFix | ft -AutoSize # PS Patches and Updates
   > wmic product get name # Installed programs
