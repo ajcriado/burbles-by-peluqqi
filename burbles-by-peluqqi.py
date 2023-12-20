@@ -66,7 +66,7 @@ class commands:
     ]
 
 def color(str, code):
-    return f"{code}{str}{bcolors.DEFAULT}"
+    return code+str+bcolors.DEFAULT
 
 def processCommand(cmd):
     choice = input("\n"+color("[>] "+cmd,bcolors.SOFTORANGE)+" ")
