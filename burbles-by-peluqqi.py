@@ -65,14 +65,14 @@ class Commands:
         "find / -type f -name *.bak -exec ls -l {} \; 2>/dev/null",
     ]
 
-def color(STR, CODE):
-    return CODE + STR + B_Colors._DEFAULT
+def color(str, code):
+    return code + str + B_Colors._DEFAULT
 
-def process_command(CMD):
-    CHOICE = input("\n" + color("[>] " + CMD, B_Colors._SOFT_ORANGE) + " ")
+def process_command(cmd):
+    choice = input("\n" + color("[>] " + cmd, B_Colors._SOFT_ORANGE) + " ")
 
-    if CHOICE == "":
-        os.system(CMD)
+    if choice == "":
+        os.system(cmd)
 
 def print_banner():
     print("======================================================================================");
@@ -90,11 +90,11 @@ def main_menu():
     print("\nMain menu:");
     print("1) Linux Privilege Escalation");
     print("2) Exit");
-    CHOICE = input("\n[>] ");
+    choice = input("\n[>] ");
 
-    if CHOICE == "1":
+    if choice == "1":
         lin_privesc_menu()
-    elif CHOICE == "2":
+    elif choice == "2":
         sys.exit()
     else:
         main_menu()
@@ -106,30 +106,30 @@ def lin_privesc_menu():
     print("3) Services enumeration");
     print("4) Credential hunting");
     print("5) Back to main menu");
-    CHOICE = input("\n[>] ");
+    choice = input("\n[>] ");
 
-    if CHOICE == "1":
+    if choice == "1":
         env_enumeration()
-    elif CHOICE == "2":
+    elif choice == "2":
         int_enumeration()
-    elif CHOICE == "3":
+    elif choice == "3":
         serv_enumeration()
-    elif CHOICE == "4":
+    elif choice == "4":
         cred_hunting()
-    elif CHOICE == "5":
+    elif choice == "5":
         main_menu()
     else:
         lin_privesc_menu()
 
 def env_enumeration():
-    USER = os.popen('whoami').read()
+    user = os.popen('whoami').read()
     print(color("\n===== ENVIRONMENT ENUMERATION ================================================================\n", B_Colors._DARK_BLUE));
     print("Press enter to execute, type N to skip")
     
-    for CMD in Commands._PRIVESC_ENVENUM:
-        process_command(CMD)
+    for cmd in Commands._PRIVESC_ENVENUM:
+        process_command(cmd)
 
-    process_command("find / -type f -name \".*\" -exec ls -l {} \; 2>/dev/null | grep " + USER)
+    process_command("find / -type f -name \".*\" -exec ls -l {} \; 2>/dev/null | grep " + user)
     print(color("\n===== END OF ENVIRONMENT ENUMERATION =========================================================", B_Colors._DARK_BLUE));
     main_menu()
 
@@ -137,8 +137,8 @@ def int_enumeration():
     print(color("\n===== INTERNALS ENUMERATION ==================================================================\n", B_Colors._DARK_BLUE));
     print("Press enter to execute, type N to skip")
     
-    for CMD in Commands._PRIVESC_INTENUM:
-        process_command(CMD)
+    for cmd in Commands._PRIVESC_INTENUM:
+        process_command(cmd)
 
     print(color("\n===== END OF INTERNALS ENUMERATION ===========================================================", B_Colors._DARK_BLUE));
     main_menu()
@@ -147,8 +147,8 @@ def serv_enumeration():
     print(color("\n===== SERVICES ===============================================================================", B_Colors._DARK_BLUE)+"\n");
     print("Press enter to execute, type N to skip")
     
-    for CMD in Commands._PRIVESC_SERVENUM:
-        process_command(CMD)
+    for cmd in Commands._PRIVESC_SERVENUM:
+        process_command(cmd)
 
     print(color("\nDo not forget to run pspy to check all processes", B_Colors._RED_WARNING));
     print(color("\n===== END OF SERVICES ENUMERATION ============================================================", B_Colors._DARK_BLUE));
@@ -158,8 +158,8 @@ def cred_hunting():
     print(color("\n===== CREDENTIAL HUNTING =====================================================================", B_Colors._DARK_BLUE)+"\n");
     print("Press enter to execute, type N to skip")
     
-    for CMD in Commands._PRIVESC_CREDHUNTING:
-        process_command(CMD)
+    for cmd in Commands._PRIVESC_CREDHUNTING:
+        process_command(cmd)
 
     print(color("\n===== END OF CREDENTIAL HUNTING ==============================================================", B_Colors._DARK_BLUE));
     main_menu()
