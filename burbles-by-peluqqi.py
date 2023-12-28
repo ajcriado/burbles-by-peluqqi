@@ -3,16 +3,16 @@ import sys
 import os
 import time
 
-class bcolors:
-    DEFAULT="\033[0;0m"
-    DARKORANGE="\033[38;5;208m"
-    SOFTORANGE="\033[38;5;180m"
-    DARKBLUE="\033[38;5;68m"
-    REDWARNING="\033[38;5;167m"
-    GREY="\033[38;5;234m"
+class B_Colors:
+    _DEFAULT = "\033[0;0m"
+    _DARK_ORANGE = "\033[38;5;208m"
+    _SOFT_ORANGE = "\033[38;5;180m"
+    _DARK_BLUE = "\033[38;5;68m"
+    _RED_WARNING = "\033[38;5;167m"
+    _GREY = "\033[38;5;234m"
 
-class commands:
-    PRIVESC_ENVENUM=[
+class Commands:
+    _PRIVESC_ENVENUM = [
         "whoami",
         "id",
         "hostname",
@@ -38,7 +38,7 @@ class commands:
         "ls -l /opt",
         "ls -l /srv"
     ]
-    PRIVESC_INTENUM=[
+    _PRIVESC_INTENUM = [
         "ip a",
         "find / -perm -4000 2>/dev/null", # Check binaries in GTFO Bins
         "cat /etc/hosts",
@@ -49,7 +49,7 @@ class commands:
         "ls -R -la /etc/cron*"
         #"find /proc -name cmdline -exec cat {} \; 2>/dev/null | tr \" \" \"\\n\""
     ]
-    PRIVESC_SERVENUM=[
+    _PRIVESC_SERVENUM = [
         "apt list --installed | tr \"/\" \" \" | cut -d\" \" -f1,3 | sed 's/[0-9]://g'",
         "sudo -V | head -n 1",
         # "ls -l /bin /usr/bin/ /usr/sbin/"
@@ -58,22 +58,23 @@ class commands:
         "ps aux | grep root",
         "ss -tulpn" # List tcp/udp listening sockets
     ]
-    PRIVESC_CREDHUNTING=[
+    _PRIVESC_CREDHUNTING = [
         "ls /var/www/html",
         "ls ~/.ssh",
         "find / -type f -name *.ssh -exec ls -l {} \; 2>/dev/null",
         "find / -type f -name *.bak -exec ls -l {} \; 2>/dev/null",
     ]
 
-def color(str, code):
-    return code+str+bcolors.DEFAULT
+def color(STR, CODE):
+    return CODE + STR + B_Colors._DEFAULT
 
-def processCommand(cmd):
-    choice = input("\n"+color("[>] "+cmd,bcolors.SOFTORANGE)+" ")
-    if choice == "":
-        os.system(cmd)
+def process_command(CMD):
+    CHOICE = input("\n" + color("[>] " + CMD, B_Colors._SOFT_ORANGE) + " ")
 
-def printBanner():
+    if CHOICE == "":
+        os.system(CMD)
+
+def print_banner():
     print("======================================================================================");
     print("|                          _                _     _                                  |");
     print("|                         | |              | |   | |                                 |");
@@ -85,88 +86,88 @@ def printBanner():
     print("|                                                 by peluqqi                         |");
     print("======================================================================================");
 
-def mainMenu():
+def main_menu():
     print("\nMain menu:");
     print("1) Linux Privilege Escalation");
     print("2) Exit");
-    choice = input("\n[>] ");
-    if choice == "1":
-        linPrivescMenu()
-    elif choice == "2":
+    CHOICE = input("\n[>] ");
+
+    if CHOICE == "1":
+        lin_privesc_menu()
+    elif CHOICE == "2":
         sys.exit()
     else:
-        mainMenu()
+        main_menu()
 
-def linPrivescMenu():
+def lin_privesc_menu():
     print("\nLinux Privilege Escalation:");
     print("1) Environment enumeration");
     print("2) Internals enumeration");
     print("3) Services enumeration");
     print("4) Credential hunting");
     print("5) Back to main menu");
+    CHOICE = input("\n[>] ");
 
-    choice = input("\n[>] ");
-    if choice == "1":
-        envEnumeration()
-    elif choice == "2":
-        intEnumeration()
-    elif choice == "3":
-        servEnumeration()
-    elif choice == "4":
-        credHunting()
-    elif choice == "5":
-        mainMenu()
+    if CHOICE == "1":
+        env_enumeration()
+    elif CHOICE == "2":
+        int_enumeration()
+    elif CHOICE == "3":
+        serv_enumeration()
+    elif CHOICE == "4":
+        cred_hunting()
+    elif CHOICE == "5":
+        main_menu()
     else:
-        linPrivescMenu()
+        lin_privesc_menu()
 
-def envEnumeration():
-    user = os.popen('whoami').read()
-    print(color("\n===== ENVIRONMENT ENUMERATION ================================================================\n",bcolors.DARKBLUE));
+def env_enumeration():
+    USER = os.popen('whoami').read()
+    print(color("\n===== ENVIRONMENT ENUMERATION ================================================================\n", B_Colors._DARK_BLUE));
     print("Press enter to execute, type N to skip")
     
-    for cmd in commands.PRIVESC_ENVENUM:
-        processCommand(cmd)
+    for CMD in Commands._PRIVESC_ENVENUM:
+        process_command(CMD)
 
-    processCommand("find / -type f -name \".*\" -exec ls -l {} \; 2>/dev/null | grep "+user)
-    print(color("\n===== END OF ENVIRONMENT ENUMERATION =========================================================",bcolors.DARKBLUE));
-    mainMenu()
+    process_command("find / -type f -name \".*\" -exec ls -l {} \; 2>/dev/null | grep " + USER)
+    print(color("\n===== END OF ENVIRONMENT ENUMERATION =========================================================", B_Colors._DARK_BLUE));
+    main_menu()
 
-def intEnumeration():
-    print(color("\n===== INTERNALS ENUMERATION ==================================================================\n",bcolors.DARKBLUE));
+def int_enumeration():
+    print(color("\n===== INTERNALS ENUMERATION ==================================================================\n", B_Colors._DARK_BLUE));
     print("Press enter to execute, type N to skip")
     
-    for cmd in commands.PRIVESC_INTENUM:
-        processCommand(cmd)
+    for CMD in Commands._PRIVESC_INTENUM:
+        process_command(CMD)
 
-    print(color("\n===== END OF INTERNALS ENUMERATION ===========================================================",bcolors.DARKBLUE));
-    mainMenu()
+    print(color("\n===== END OF INTERNALS ENUMERATION ===========================================================", B_Colors._DARK_BLUE));
+    main_menu()
 
-def servEnumeration():
-    print(color("\n===== SERVICES ===============================================================================",bcolors.DARKBLUE)+"\n");
+def serv_enumeration():
+    print(color("\n===== SERVICES ===============================================================================", B_Colors._DARK_BLUE)+"\n");
     print("Press enter to execute, type N to skip")
     
-    for cmd in commands.PRIVESC_SERVENUM:
-        processCommand(cmd)
+    for CMD in Commands._PRIVESC_SERVENUM:
+        process_command(CMD)
 
-    print(color("\nDo not forget to run pspy to check all processes",bcolors.REDWARNING));
-    print(color("\n===== END OF SERVICES ENUMERATION ============================================================",bcolors.DARKBLUE));
-    mainMenu()
+    print(color("\nDo not forget to run pspy to check all processes", B_Colors._RED_WARNING));
+    print(color("\n===== END OF SERVICES ENUMERATION ============================================================", B_Colors._DARK_BLUE));
+    main_menu()
 
-
-def credHunting():
-    print(color("\n===== CREDENTIAL HUNTING =====================================================================",bcolors.DARKBLUE)+"\n");
+def cred_hunting():
+    print(color("\n===== CREDENTIAL HUNTING =====================================================================", B_Colors._DARK_BLUE)+"\n");
     print("Press enter to execute, type N to skip")
     
-    for cmd in commands.PRIVESC_CREDHUNTING:
-        processCommand(cmd)
+    for CMD in Commands._PRIVESC_CREDHUNTING:
+        process_command(CMD)
 
-    print(color("\n===== END OF CREDENTIAL HUNTING ==============================================================",bcolors.DARKBLUE));
-    mainMenu()
+    print(color("\n===== END OF CREDENTIAL HUNTING ==============================================================", B_Colors._DARK_BLUE));
+    main_menu()
 
 if __name__ == "__main__":
     try:
-        printBanner()
-        mainMenu()
+        print_banner()
+        main_menu()
     except KeyboardInterrupt:
         print(" Finishing up...\r"),
         time.sleep(0.25)
