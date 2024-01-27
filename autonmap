@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# Simple script to enumerate boxes for OSCP. It runs incursore and nmap full scan, useful to compare scans in case something is missing
+# Place the script in /usr/local/sbin/autonmap and run like this: autonmap -H 192.168.235.137 -t script
+
+# Parse flags
+while [ $# -gt 0 ]; do
+        key="$1"
+
+        case "${key}" in
+        -H | --host)
+                HOST="$2"
+                shift
+                shift
+                ;;
+        -t | --type)
+                TYPE="$2"
+                shift
+                shift
+                ;;
+        esac
+done
+
+sudo incursore.sh --host ${HOST} --type ${TYPE}
+sudo nmap -p- -A -T4 -sCV ${HOST} -oN "${HOST}/nmap/Fullscan-${HOST}"
